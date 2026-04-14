@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>কিতাবখানা — ইসলামিক বই রিভিউ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5ede0;
+  --parchment: #e8d9c0;
+  --gold: #c9913a;
+  --gold-light: #e6b45c;
+  --gold-pale: rgba(201,145,58,0.15);
+  --ink: #1a1008;
+  --dark: #0e1a12;
+  --green-deep: #112a1c;
+  --green-mid: #1e4a2e;
+  --green-light: #2d6b43;
+  --green-muted: #3a7a52;
+  --red-accent: #8b2a1a;
+  --text-muted: #6b5a44;
+  --text-light: #9a8870;
+  --border: rgba(201,145,58,0.2);
+  --shadow-sm: 0 2px 8px rgba(14,26,18,0.12);
+  --shadow-md: 0 6px 24px rgba(14,26,18,0.18);
+  --shadow-lg: 0 16px 48px rgba(14,26,18,0.25);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans Bengali', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Parchment texture */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(201,145,58,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(30,74,46,0.06) 0%, transparent 60%);
+  pointer-events:none; z-index:0;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: linear-gradient(135deg, var(--green-deep) 0%, #0a1f14 100%);
+  position: sticky; top:0; z-index:200;
+  border-bottom: 1px solid rgba(201,145,58,0.3);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+
+.header-inner {
+  max-width:1200px; margin:0 auto;
+  padding: 0 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  height: 62px;
+}
+
+.logo {
+  display:flex; align-items:center; gap:10px;
+  cursor:pointer; text-decoration:none;
+}
+
+.logo-icon {
+  width:38px; height:38px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.2rem;
+  box-shadow: 0 2px 8px rgba(201,145,58,0.4);
+}
+
+.logo-text {
+  font-family:'Noto Serif Bengali', serif;
+  font-size:1.25rem; font-weight:700;
+  color: var(--cream);
+}
+
+.logo-text span { color: var(--gold-light); }
+
+.header-nav {
+  display:flex; align-items:center; gap:4px;
+}
+
+.hnav-btn {
+  background:none; border:none;
+  color:rgba(245,237,224,0.65);
+  padding:8px 14px; border-radius:6px;
+  font-family:'Noto Sans Bengali', sans-serif;
+  font-size:0.85rem; cursor:pointer;
+  transition:all 0.2s;
+  white-space:nowrap;
+}
+
+.hnav-btn:hover { color:var(--gold-light); background:rgba(201,145,58,0.1); }
+.hnav-btn.active { color:var(--gold-light); background:rgba(201,145,58,0.15); }
+
+/* Mobile nav toggle */
+.burger {
+  display:none; background:none; border:none;
+  color:var(--cream); font-size:1.4rem; cursor:pointer;
+}
+
+@media(max-width:700px) {
+  .header-nav { display:none; }
+  .burger { display:block; }
+  .header-nav.open {
+    display:flex; flex-direction:column;
+    position:absolute; top:62px; left:0; right:0;
+    background:var(--green-deep);
+    padding:12px; z-index:300;
+    border-bottom:1px solid var(--border);
+  }
+}
+
+/* ── PAGE WRAPPER ── */
+#app { position:relative; z-index:1; }
+
+.page { display:none; animation: pageIn 0.35s ease both; }
+.page.active { display:block; }
+
+@keyframes pageIn {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  background:var(--green-deep);
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.breadcrumb-inner {
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  display:flex; align-items:center; gap:8px;
+  font-size:0.8rem; color:rgba(245,237,224,0.5);
+}
+
+.bc-link {
+  color:var(--gold-light); cursor:pointer; text-decoration:none;
+  transition:opacity 0.2s;
+}
+.bc-link:hover { opacity:0.8; }
+.bc-sep { opacity:0.4; }
+
+/* ── HOME PAGE ── */
+.hero-section {
+  background: linear-gradient(160deg, var(--green-deep) 0%, #0e2a1c 60%, #152a1e 100%);
+  padding:70px 20px 60px;
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+
+.hero-bg-pattern {
+  position:absolute; inset:0; opacity:0.04;
+  background-image:
+    repeating-linear-gradient(0deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 40px),
+    repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 40px);
+}
+
+.hero-arabic {
+  font-size:1.5rem; color:var(--gold-light);
+  margin-bottom:16px; opacity:0.9; letter-spacing:0.1em;
+  font-family:serif;
+}
+
+.hero-title {
+  font-family:'Noto Serif Bengali', serif;
+  font-size:clamp(2.4rem, 5vw, 3.8rem);
+  font-weight:700; color:var(--cream);
+  line-height:1.15; margin-bottom:16px;
+}
+
+.hero-title em { color:var(--gold-light); font-style:normal; }
+
+.hero-sub {
+  color:rgba(245,237,224,0.6);
+  font-size:1.05rem; max-width:520px; margin:0 auto 32px;
+  line-height:1.7;
+}
+
+.hero-stats {
+  display:flex; justify-content:center; gap:32px;
+  flex-wrap:wrap;
+}
+
+.stat-box {
+  text-align:center;
+}
+
+.stat-num {
+  font-family:'Noto Serif Bengali', serif;
+  font-size:2rem; font-weight:700;
+  color:var(--gold-light);
+  display:block;
+}
+
+.stat-lbl {
+  font-size:0.8rem; color:rgba(245,237,224,0.5);
+  margin-top:2px;
+}
+
+.ornament-line {
+  display:flex; align-items:center; gap:12px;
+  max-width:300px; margin:24px auto;
+  color:rgba(201,145,58,0.5);
+}
+.ornament-line::before,.ornament-line::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold));
+}
+.ornament-line::after { transform:scaleX(-1); }
+
+/* ── SECTION ── */
+.section {
+  max-width:1200px; margin:0 auto;
+  padding:48px 20px;
+}
+
+.section-header {
+  display:flex; align-items:baseline; justify-content:space-between;
+  margin-bottom:28px;
+}
+
+.section-title {
+  font-family:'Noto Serif Bengali', serif;
+  font-size:1.5rem; font-weight:700;
+  color:var(--ink);
+  position:relative;
+  padding-bottom:10px;
+}
+
+.section-title::after {
+  content:'';
+  position:absolute; bottom:0; left:0;
+  width:48px; height:3px;
+  background:linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius:2px;
+}
+
+.see-all {
+  background:none; border:1px solid var(--border);
+  color:var(--green-light); padding:6px 16px;
+  border-radius:20px; font-family:'Noto Sans Bengali', sans-serif;
+  font-size:0.8rem; cursor:pointer;
+  transition:all 0.2s;
+}
+.see-all:hover { background:var(--gold-pale); border-color:var(--gold); color:var(--gold); }
+
+/* ── CATEGORY CARDS GRID ── */
+.cat-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  gap:16px;
+}
+
+.cat-card {
+  border-radius:14px; overflow:hidden;
+  cursor:pointer;
+  transition:transform 0.25s, box-shadow 0.25s;
+  box-shadow:var(--shadow-sm);
+  animation:fadeUp 0.4s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.cat-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+
+.cat-card-top {
+  height:110px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.8rem;
+  position:relative;
+}
+
+.cat-card-top::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,0.3),transparent);
+}
+
+.cat-card-body {
+  background:white; padding:16px;
+}
+
+.cat-card-name {
+  font-family:'Noto Serif Bengali', serif;
+  font-size:1rem; font-weight:700;
+  color:var(--ink); margin-bottom:4px;
+}
+
+.cat-card-desc {
+  font-size:0.78rem; color:var(--text-muted);
+  line-height:1.5; margin-bottom:10px;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+
+.cat-card-footer {
+  display:flex; align-items:center; justify-content:space-between;
+}
+
+.cat-count-pill {
+  background:var(--gold-pale);
+  border:1px solid var(--border);
+  color:var(--gold);
+  padding:2px 10px; border-radius:10px;
+  font-size:0.72rem; font-weight:600;
+}
+
+.cat-arrow { color:var(--green-light); font-size:0.85rem; }
+
+/* ── AUTHOR CARDS ── */
+.author-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+  gap:16px;
+}
+
+.author-card {
+  background:white; border-radius:14px;
+  padding:24px 16px; text-align:center;
+  cursor:pointer; border:1px solid var(--parchment);
+  box-shadow:var(--shadow-sm);
+  transition:all 0.25s;
+  animation:fadeUp 0.4s ease both;
+}
+
+.author-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-md);
+  border-color:var(--gold);
+}
+
+.author-avatar {
+  width:64px; height:64px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.8rem; margin:0 auto 14px;
+  position:relative;
+}
+
+.author-avatar::after {
+  content:''; position:absolute; inset:-3px;
+  border-radius:50%;
+  border:2px solid var(--gold);
+  opacity:0.5;
+}
+
+.author-name {
+  font-family:'Noto Serif Bengali', serif;
+  font-size:0.92rem; font-weight:700;
+  color:var(--ink); margin-bottom:4px;
+  line-height:1.3;
+}
+
+.author-era {
+  font-size:0.74rem; color:var(--text-light);
+  margin-bottom:8px;
+}
+
+.author-books-count {
+  font-size:0.75rem;
+  background:var(--gold-pale); border:1px solid var(--border);
+  color:var(--gold); padding:3px 10px; border-radius:10px;
+  display:inline-block;
+}
+
+/* ── BOOK CARDS ── */
+.books-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(270px, 1fr));
+  gap:20px;
+}
+
+.book-card {
+  background:white; border-radius:12px;
+  overflow:hidden; cursor:pointer;
+  border:1px solid var(--parchment);
+  box-shadow:var(--shadow-sm);
+  transition:all 0.25s;
+  animation:fadeUp 0.4s ease both;
+}
+
+.book-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:rgba(201,145,58,0.3); }
+
+.book-spine {
+  height:150px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:3rem; position:relative; overflow:hidden;
+}
+
+.book-spine-label {
+  position:absolute; bottom:10px; left:10px;
+  background:rgba(0,0,0,0.4); color:white;
+  font-size:0.7rem; padding:2px 8px; border-radius:8px;
+  backdrop-filter:blur(4px);
+}
+
+.book-body { padding:16px; }
+
+.book-meta {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.book-cat-tag {
+  font-size:0.7rem; font-weight:600;
+  padding:3px 10px; border-radius:10px;
+  background:var(--gold-pale); color:var(--gold);
+  border:1px solid var(--border);
+}
+
+.stars { color:var(--gold); font-size:0.85rem; letter-spacing:1px; }
+
+.book-title {
+  font-family:'Noto Serif Bengali', serif;
+  font-size:1rem; font-weight:700;
+  color:var(--ink); margin-bottom:4px; line-height:1.4;
+}
+
+.book-author-link {
+  font-size:0.8rem; color:var(--green-light);
+  font-weight:500; cursor:pointer;
+  transition:color 0.2s; margin-bottom:8px;
+  display:inline-block;
+}
+.book-author-link:hover { color:var(--gold); }
+
+.book-excerpt {
+  font-size:0.83rem; color:var(--text-muted);
+  line-height:1.65;
+  display:-webkit-box; -webkit-line-clamp:3;
+  -webkit-box-orient:vertical; overflow:hidden;
+}
+
+.book-footer {
+  padding:10px 16px;
+  border-top:1px solid var(--parchment);
+  display:flex; align-items:center; justify-content:space-between;
+}
+
+.reviewer-tag {
+  font-size:0.75rem; color:var(--text-light);
+}
+
+.read-more {
+  background:var(--green-deep); color:var(--cream);
+  border:none; padding:5px 14px; border-radius:16px;
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:0.76rem; cursor:pointer;
+  transition:background 0.2s;
+}
+.read-more:hover { background:var(--green-mid); }
+
+/* ── CATEGORY PAGE HERO ── */
+.cat-page-hero {
+  padding:56px 20px 48px;
+  position:relative; overflow:hidden;
+}
+
+.cat-hero-inner {
+  max-width:1200px; margin:0 auto;
+  display:flex; align-items:center; gap:32px;
+}
+
+.cat-hero-icon {
+  font-size:4.5rem;
+  width:100px; height:100px;
+  border-radius:20px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  box-shadow:var(--shadow-md);
+}
+
+.cat-hero-info h1 {
+  font-family:'Noto Serif Bengali',serif;
+  font-size:2.2rem; font-weight:700;
+  color:var(--cream); line-height:1.2;
+  margin-bottom:8px;
+}
+
+.cat-hero-info p {
+  color:rgba(245,237,224,0.65); font-size:0.95rem;
+  line-height:1.7; max-width:600px;
+}
+
+.cat-hero-stats {
+  display:flex; gap:24px; margin-top:16px; flex-wrap:wrap;
+}
+
+.cat-stat {
+  text-align:center;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(201,145,58,0.2);
+  padding:10px 20px; border-radius:10px;
+}
+
+.cat-stat-n {
+  font-family:'Noto Serif Bengali',serif;
+  font-size:1.4rem; font-weight:700;
+  color:var(--gold-light); display:block;
+}
+
+.cat-stat-l { font-size:0.75rem; color:rgba(245,237,224,0.5); }
+
+/* ── AUTHOR PAGE HERO ── */
+.author-page-hero {
+  padding:52px 20px 44px;
+  position:relative; overflow:hidden;
+}
+
+.author-hero-inner {
+  max-width:1200px; margin:0 auto;
+  display:flex; align-items:flex-start; gap:32px;
+  flex-wrap:wrap;
+}
+
+.author-big-avatar {
+  width:120px; height:120px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:3.5rem; flex-shrink:0;
+  border:3px solid var(--gold);
+  box-shadow:0 0 30px rgba(201,145,58,0.3);
+}
+
+.author-hero-info h1 {
+  font-family:'Noto Serif Bengali',serif;
+  font-size:2rem; font-weight:700;
+  color:var(--cream); line-height:1.2; margin-bottom:6px;
+}
+
+.author-title-tag {
+  display:inline-block;
+  background:rgba(201,145,58,0.2);
+  border:1px solid rgba(201,145,58,0.4);
+  color:var(--gold-light); padding:3px 14px;
+  border-radius:16px; font-size:0.8rem;
+  margin-bottom:12px;
+}
+
+.author-bio {
+  color:rgba(245,237,224,0.65); font-size:0.9rem;
+  line-height:1.75; max-width:620px;
+}
+
+.author-meta-chips {
+  display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;
+}
+
+.meta-chip {
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(245,237,224,0.6);
+  padding:4px 14px; border-radius:20px; font-size:0.78rem;
+}
+
+/* ── BOOK DETAIL MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0; z-index:500;
+  background:rgba(10,20,14,0.8);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.25s;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+
+.modal-box {
+  background:var(--cream); border-radius:18px;
+  max-width:640px; width:100%;
+  max-height:88vh; overflow-y:auto;
+  transform:translateY(20px) scale(0.97);
+  transition:transform 0.25s;
+  box-shadow:var(--shadow-lg);
+}
+.modal-overlay.open .modal-box { transform:translateY(0) scale(1); }
+
+.modal-top {
+  height:160px; display:flex;
+  align-items:center; justify-content:center;
+  font-size:4rem; position:relative;
+}
+
+.modal-close {
+  position:absolute; top:14px; right:14px;
+  background:rgba(0,0,0,0.3); border:none;
+  color:white; width:32px; height:32px;
+  border-radius:50%; cursor:pointer; font-size:1rem;
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.2s;
+}
+.modal-close:hover { background:rgba(0,0,0,0.5); }
+
+.modal-content { padding:28px; }
+
+.modal-cat-tag {
+  font-size:0.75rem; font-weight:600;
+  padding:3px 12px; border-radius:10px;
+  background:var(--gold-pale); color:var(--gold);
+  border:1px solid var(--border);
+  display:inline-block; margin-bottom:12px;
+}
+
+.modal-title {
+  font-family:'Noto Serif Bengali',serif;
+  font-size:1.6rem; font-weight:700;
+  color:var(--ink); line-height:1.3; margin-bottom:6px;
+}
+
+.modal-author-line {
+  color:var(--green-light); font-weight:500;
+  font-size:0.9rem; margin-bottom:12px;
+  cursor:pointer;
+}
+.modal-author-line:hover { color:var(--gold); }
+
+.modal-stars { color:var(--gold); font-size:1.2rem; letter-spacing:2px; margin-bottom:20px; }
+
+.modal-section { margin-bottom:18px; }
+.modal-section h4 {
+  font-family:'Noto Serif Bengali',serif;
+  font-size:0.95rem; font-weight:700;
+  color:var(--green-deep); margin-bottom:8px;
+}
+.modal-section p {
+  font-size:0.88rem; line-height:1.85; color:#3a2e20;
+}
+
+.modal-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+.modal-tag {
+  background:var(--parchment); color:var(--green-mid);
+  padding:4px 12px; border-radius:10px; font-size:0.76rem; font-weight:500;
+}
+
+/* ── ADD REVIEW ── */
+.add-review-wrap {
+  background:white; border-radius:16px;
+  padding:32px;
+  border:1px solid var(--parchment);
+  box-shadow:var(--shadow-sm);
+  max-width:800px;
+}
+
+.add-review-wrap h3 {
+  font-family:'Noto Serif Bengali',serif;
+  font-size:1.25rem; font-weight:700;
+  color:var(--green-deep); margin-bottom:4px;
+}
+
+.add-review-wrap > p { color:var(--text-light); font-size:0.84rem; margin-bottom:24px; }
+
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+@media(max-width:500px) { .form-row { grid-template-columns:1fr; } }
+
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-group.full { grid-column:1/-1; }
+
+label { font-size:0.8rem; font-weight:600; color:var(--green-deep); }
+
+input,textarea,select {
+  font-family:'Noto Sans Bengali',sans-serif; font-size:0.86rem;
+  border:1px solid var(--parchment); border-radius:8px;
+  padding:10px 14px; background:var(--cream); color:var(--ink);
+  outline:none; transition:border-color 0.2s;
+}
+input:focus,textarea:focus,select:focus {
+  border-color:var(--green-light); background:white;
+}
+textarea { resize:vertical; min-height:110px; }
+
+.star-picker { display:flex; gap:6px; }
+.star-picker span {
+  font-size:1.5rem; cursor:pointer; color:#ccc;
+  transition:color 0.15s;
+}
+.star-picker span.lit { color:var(--gold); }
+
+.submit-btn {
+  background:linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  color:var(--cream); border:none; padding:12px 30px;
+  border-radius:8px; font-family:'Noto Sans Bengali',sans-serif;
+  font-size:0.92rem; font-weight:500; cursor:pointer;
+  box-shadow:0 4px 16px rgba(14,26,18,0.3);
+  transition:opacity 0.2s, transform 0.2s; margin-top:6px;
+}
+.submit-btn:hover { opacity:0.9; transform:translateY(-1px); }
+
+.toast {
+  display:none; align-items:center; gap:8px;
+  background:var(--green-mid); color:var(--cream);
+  padding:10px 18px; border-radius:8px;
+  margin-top:12px; font-size:0.86rem;
+}
+.toast.show { display:flex; }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  display:flex; align-items:center; gap:8px;
+  flex-wrap:wrap; margin-bottom:24px;
+}
+
+.filter-btn {
+  background:white; border:1px solid var(--parchment);
+  color:var(--text-muted); padding:6px 16px;
+  border-radius:20px; font-family:'Noto Sans Bengali',sans-serif;
+  font-size:0.8rem; cursor:pointer; transition:all 0.2s;
+}
+.filter-btn:hover,.filter-btn.active {
+  background:var(--green-deep); color:var(--cream);
+  border-color:var(--green-deep);
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align:center; padding:60px 20px;
+  color:var(--text-light);
+}
+.empty-state .big-icon { font-size:3rem; margin-bottom:12px; }
+.empty-state p { font-size:0.9rem; }
+
+/* ── DIVIDER ── */
+.divider {
+  height:1px; background:linear-gradient(90deg, transparent, var(--parchment), transparent);
+  margin:8px 0;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px) {
+  .cat-hero-inner { flex-direction:column; }
+  .author-hero-inner { flex-direction:column; }
+  .hero-stats { gap:20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" onclick="navigate('home')">
+      <div class="logo-icon">📚</div>
+      <span class="logo-text">কিতাব<span>খানা</span></span>
+    </a>
+    <button class="burger" onclick="toggleMobileNav()" id="burgerBtn">☰</button>
+    <nav class="header-nav" id="headerNav">
+      <button class="hnav-btn active" id="nav-home" onclick="navigate('home');closeMobileNav()">হোম</button>
+      <button class="hnav-btn" id="nav-categories" onclick="navigate('categories');closeMobileNav()">ক্যাটাগরি</button>
+      <button class="hnav-btn" id="nav-authors" onclick="navigate('authors');closeMobileNav()">লেখকগণ</button>
+      <button class="hnav-btn" id="nav-all-books" onclick="navigate('all-books');closeMobileNav()">সব বই</button>
+      <button class="hnav-btn" id="nav-add" onclick="navigate('add-review');closeMobileNav()">+ রিভিউ</button>
+    </nav>
+  </div>
+</header>
+
+<div id="app">
+
+<!-- ══════════════════════════════════
+     HOME PAGE
+══════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="hero-bg-pattern"></div>
+    <div style="position:relative;z-index:1;">
+      <div class="hero-arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+      <h1 class="hero-title">ইসলামিক জ্ঞানের<br><em>আলোকিত পাঠশালা</em></h1>
+      <p class="hero-sub">কুরআন-হাদিস থেকে সিরাত, ফিকহ থেকে তাসাউফ — বিশ্বের সেরা ইসলামিক গ্রন্থের বিশ্লেষণধর্মী বাংলা রিভিউ</p>
+      <div class="ornament-line">✦</div>
+      <div class="hero-stats" id="heroStats"></div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">ক্যাটাগরি সমূহ</h2>
+      <button class="see-all" onclick="navigate('categories')">সব দেখুন →</button>
+    </div>
+    <div class="cat-grid" id="homeCatGrid"></div>
+  </div>
+
+  <div class="divider" style="max-width:1200px;margin:0 auto;"></div>
+
+  <!-- Featured Books -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">বাছাই রিভিউ</h2>
+      <button class="see-all" onclick="navigate('all-books')">সব বই →</button>
+    </div>
+    <div class="books-grid" id="homeBookGrid"></div>
+  </div>
+
+  <div class="divider" style="max-width:1200px;margin:0 auto;"></div>
+
+  <!-- Authors -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">বিশিষ্ট লেখকগণ</h2>
+      <button class="see-all" onclick="navigate('authors')">সবাই →</button>
+    </div>
+    <div class="author-grid" id="homeAuthorGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     CATEGORIES PAGE
+══════════════════════════════════ -->
+<div id="page-categories" class="page">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <span class="bc-link" onclick="navigate('home')">হোম</span>
+      <span class="bc-sep">›</span>
+      <span>ক্যাটাগরি</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">সকল ক্যাটাগরি</h2>
+    </div>
+    <div class="cat-grid" id="allCatGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SINGLE CATEGORY PAGE
+══════════════════════════════════ -->
+<div id="page-category" class="page">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <span class="bc-link" onclick="navigate('home')">হোম</span>
+      <span class="bc-sep">›</span>
+      <span class="bc-link" onclick="navigate('categories')">ক্যাটাগরি</span>
+      <span class="bc-sep">›</span>
+      <span id="bcCatName">—</span>
+    </div>
+  </div>
+  <div id="catPageHeroWrap"></div>
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title" id="catBooksTitle">বইসমূহ</h2>
+    </div>
+    <div class="books-grid" id="catBooksGrid"></div>
+    <div class="empty-state" id="catBooksEmpty" style="display:none;">
+      <div class="big-icon">📭</div>
+      <p>এই ক্যাটাগরিতে এখনো কোনো রিভিউ নেই।</p>
+    </div>
+    <!-- Authors in this category -->
+    <div id="catAuthorsSection">
+      <div style="height:40px"></div>
+      <div class="section-header">
+        <h2 class="section-title" id="catAuthorsTitle">এই ক্যাটাগরির লেখকগণ</h2>
+      </div>
+      <div class="author-grid" id="catAuthorsGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     AUTHORS PAGE
+══════════════════════════════════ -->
+<div id="page-authors" class="page">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <span class="bc-link" onclick="navigate('home')">হোম</span>
+      <span class="bc-sep">›</span>
+      <span>লেখকগণ</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">সকল লেখক</h2>
+    </div>
+    <div class="filter-bar" id="authorCatFilter"></div>
+    <div class="author-grid" id="allAuthorGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SINGLE AUTHOR PAGE
+══════════════════════════════════ -->
+<div id="page-author" class="page">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <span class="bc-link" onclick="navigate('home')">হোম</span>
+      <span class="bc-sep">›</span>
+      <span class="bc-link" onclick="navigate('authors')">লেখকগণ</span>
+      <span class="bc-sep">›</span>
+      <span id="bcAuthorName">—</span>
+    </div>
+  </div>
+  <div id="authorPageHeroWrap"></div>
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title" id="authorBooksTitle">রচিত গ্রন্থ</h2>
+    </div>
+    <div class="books-grid" id="authorBooksGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ALL BOOKS PAGE
+══════════════════════════════════ -->
+<div id="page-all-books" class="page">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <span class="bc-link" onclick="navigate('home')">হোম</span>
+      <span class="bc-sep">›</span>
+      <span>সব বই</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">সব রিভিউ</h2>
+    </div>
+    <div class="filter-bar" id="allBooksFilter"></div>
+    <div class="books-grid" id="allBooksGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ADD REVIEW PAGE
+══════════════════════════════════ -->
+<div id="page-add-review" class="page">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <span class="bc-link" onclick="navigate('home')">হোম</span>
+      <span class="bc-sep">›</span>
+      <span>রিভিউ যোগ করুন</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="add-review-wrap">
+      <h3>✍️ নতুন বই রিভিউ</h3>
+      <p>আপনার পড়া ইসলামিক বই সম্পর্কে মতামত শেয়ার করুন</p>
+      <div class="form-row">
+        <div class="form-group"><label>বইয়ের নাম *</label><input id="rv_title" type="text" placeholder="যেমন: রিয়াদুস সালিহীন"></div>
+        <div class="form-group"><label>লেখকের নাম *</label><input id="rv_author" type="text" placeholder="যেমন: ইমাম নববী (রহ.)"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>ক্যাটাগরি *</label>
+          <select id="rv_cat">
+            <option value="">— বেছে নিন —</option>
+            <option>আকিদা</option><option>ফিকহ</option><option>হাদিস</option>
+            <option>তাফসির</option><option>সিরাত</option><option>আধ্যাত্মিকতা</option>
+            <option>ইতিহাস</option><option>দাওয়াহ</option>
+          </select>
+        </div>
+        <div class="form-group"><label>রেটিং</label>
+          <div class="star-picker" id="starPicker">
+            <span onclick="setRating(1)">★</span><span onclick="setRating(2)">★</span>
+            <span onclick="setRating(3)">★</span><span onclick="setRating(4)">★</span>
+            <span onclick="setRating(5)">★</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label>রিভিউ *</label>
+          <textarea id="rv_review" placeholder="বিস্তারিত মতামত লিখুন..."></textarea>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>ট্যাগ (কমা দিয়ে আলাদা করুন)</label>
+          <input id="rv_tags" type="text" placeholder="যেমন: তাওহিদ, আকিদা">
+        </div>
+        <div class="form-group"><label>আপনার নাম</label>
+          <input id="rv_reviewer" type="text" placeholder="ঐচ্ছিক">
+        </div>
+      </div>
+      <button class="submit-btn" onclick="submitReview()">রিভিউ প্রকাশ করুন →</button>
+      <div class="toast" id="rvToast">✅ রিভিউ সফলভাবে যোগ হয়েছে!</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- #app -->
+
+<!-- BOOK MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalBg(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-top" id="modalTop">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════
+   DATA
+════════════════════════════════ */
+const CATEGORIES = [
+  { id:'আকিদা',        emoji:'🕌', color:'#112a1c',
+    desc:'ইসলামের মূল বিশ্বাস — তাওহিদ, রিসালাত, আখিরাত এবং গাইবের বিষয়সমূহ নিয়ে রচিত গ্রন্থ।',
+    longDesc:'আকিদা শাস্ত্র ইসলামের বিশ্বাসের ভিত্তি স্থাপন করে। আল্লাহর একত্ব, নবুওয়াত, ফেরেশতা, কিতাব, কিয়ামত এবং তাকদির — এই ছয়টি ইমানের মূল বিষয় নিয়ে বিস্তারিত আলোচনা থাকে এই ক্যাটাগরির বইগুলোতে।' },
+  { id:'ফিকহ',         emoji:'⚖️', color:'#1a2e10',
+    desc:'ইসলামী আইনশাস্ত্র — ইবাদত, মুয়ামালাত, পারিবারিক আইন ও ফতোয়া বিষয়ক গ্রন্থ।',
+    longDesc:'ফিকহ হলো ইসলামী আইনের ব্যবহারিক দিক। পবিত্রতা, নামাজ, রোজা, হজ, যাকাত থেকে শুরু করে বিবাহ, তালাক, উত্তরাধিকার এবং ব্যবসা-বাণিজ্যের বিধি-বিধান সম্পর্কিত গ্রন্থসমূহ এই ক্যাটাগরিতে অন্তর্ভুক্ত।' },
+  { id:'হাদিস',        emoji:'📜', color:'#2a1a08',
+    desc:'রাসুলুল্লাহ ﷺ-এর বাণী, কর্ম ও অনুমোদনের সংকলন এবং হাদিসের ব্যাখ্যাগ্রন্থ।',
+    longDesc:'হাদিস শাস্ত্র ইসলামের দ্বিতীয় প্রধান উৎস। সহিহ বুখারি, মুসলিম, তিরমিযি সহ বিভিন্ন হাদিস সংকলন এবং সেগুলোর ব্যাখ্যাগ্রন্থ এই ক্যাটাগরিতে পাবেন। হাদিসের সনদ যাচাই ও মতন বিশ্লেষণের গ্রন্থও এখানে অন্তর্ভুক্ত।' },
+  { id:'তাফসির',       emoji:'📖', color:'#2a1408',
+    desc:'কুরআনুল কারিমের ব্যাখ্যা-বিশ্লেষণ এবং কুরআনিক বিজ্ঞান বিষয়ক গ্রন্থ।',
+    longDesc:'তাফসির শাস্ত্রে আল্লাহর কালামের গভীর অর্থ ও মর্ম উদঘাটন করা হয়। ইবন কাসির, তাবারি, বাগাওয়ি সহ বিভিন্ন মুফাসসিরের রচনা এবং আধুনিক তাফসিরগ্রন্থ এই ক্যাটাগরিতে পাওয়া যাবে।' },
+  { id:'সিরাত',        emoji:'🌙', color:'#1a0a3a',
+    desc:'নবী মুহাম্মাদ ﷺ-এর পবিত্র জীবনী, সাহাবায়ে কিরামের ইতিহাস ও তাবিঈনের জীবনকথা।',
+    longDesc:'সিরাত সাহিত্য নবী ﷺ-এর জীবন, চরিত্র, যুদ্ধ-অভিযান এবং সাহাবিদের জীবন সম্পর্কিত গ্রন্থের সমন্বয়। এই গ্রন্থগুলো পড়ে মুসলমানরা আদর্শ জীবনযাপনের অনুপ্রেরণা পেয়ে থাকেন।' },
+  { id:'আধ্যাত্মিকতা', emoji:'💫', color:'#0a1a3a',
+    desc:'তাযকিয়াতুন নাফস, আত্মশুদ্ধি, তাসাউফ এবং অন্তরের রোগ-মুক্তির পথনির্দেশিকা।',
+    longDesc:'আধ্যাত্মিকতার গ্রন্থগুলো মুসলিমদের অন্তরকে পরিশুদ্ধ করতে সাহায্য করে। ইখলাস, তাওয়াক্কুল, সবর, শোকর এবং আল্লাহর ভালোবাসা — এই গুণাবলী অর্জনের পথ দেখায় এই বইগুলো।' },
+  { id:'ইতিহাস',       emoji:'🏛️', color:'#1a1208',
+    desc:'ইসলামী সভ্যতার ইতিহাস, খিলাফতের উত্থান-পতন এবং মুসলিম বিশ্বের ক্রমবিকাশ।',
+    longDesc:'ইসলামের ইতিহাস শুধু যুদ্ধ-বিগ্রহের কথা নয়, এতে রয়েছে জ্ঞান-বিজ্ঞানের বিকাশ, সভ্যতার উত্থান এবং মানবতার সেবায় মুসলিমদের অবদানের কথা। এই ক্যাটাগরিতে সেসব ঐতিহাসিক গ্রন্থ রয়েছে।' },
+  { id:'দাওয়াহ',      emoji:'🗣️', color:'#0a2a1a',
+    desc:'ইসলাম প্রচার, তুলনামূলক ধর্মতত্ত্ব এবং আধুনিক জীবনে ইসলামের প্রাসঙ্গিকতা।',
+    longDesc:'দাওয়াহ বিভাগের বইগুলো মুসলিমদের ইসলামের বার্তা সুন্দরভাবে উপস্থাপনে সাহায্য করে। অমুসলিমদের প্রশ্নের জবাব, ইসলামের সৌন্দর্য তুলে ধরা এবং সমকালীন চ্যালেঞ্জ মোকাবেলার উপায় এতে পাওয়া যায়।' },
+];
+
+const AUTHORS = [
+  { id:'imam-nawawi', name:'ইমাম নববী (রহ.)', era:'৬৩১–৬৭৬ হি.', emoji:'👳', color:'#2d5a3d',
+    title:'মুহাদ্দিস ও ফকিহ', cats:['হাদিস','ফিকহ'],
+    bio:'ইমাম ইয়াহইয়া বিন শারফ আন-নববী (রহ.) ছিলেন শাফিয়ি মাযহাবের অন্যতম শ্রেষ্ঠ আলিম। তাঁর "রিয়াদুস সালিহীন", "আল-আযকার" ও "শারহু মুসলিম" বিশ্বব্যাপী মুসলিম পরিবারে পঠিত হয়।',
+    meta:['সিরিয়া','শাফিয়ি মাযহাব','৪৫ বছর বয়সে ইন্তেকাল'] },
+  { id:'ibn-kathir', name:'ইমাম ইবন কাসির (রহ.)', era:'৭০১–৭৭৪ হি.', emoji:'🧓', color:'#5a3010',
+    title:'মুফাসসির ও ঐতিহাসিক', cats:['তাফসির','ইতিহাস'],
+    bio:'ইমাম ইসমাইল বিন উমর ইবন কাসির (রহ.) ছিলেন মধ্যযুগের অন্যতম সেরা মুফাসসির ও ঐতিহাসিক। তাঁর "তাফসির ইবন কাসির" ও "আল-বিদায়া ওয়ান নিহায়া" ইসলামী জ্ঞানের ভাণ্ডার।',
+    meta:['সিরিয়া','শাফিয়ি মাযহাব','ইবন তাইমিয়ার ছাত্র'] },
+  { id:'imam-ghazali', name:'ইমাম গাযালি (রহ.)', era:'৪৫০–৫০৫ হি.', emoji:'🎓', color:'#1a2a4a',
+    title:'দার্শনিক ও মুতাকাল্লিম', cats:['আধ্যাত্মিকতা','আকিদা'],
+    bio:'আবু হামিদ মুহাম্মাদ আল-গাযালি (রহ.) ছিলেন ইসলামী দর্শন ও আধ্যাত্মিকতার এক মহীরুহ। তাঁর "এহইয়াউ উলুমিদ্দিন" গ্রন্থটি ইসলামের আধ্যাত্মিক পুনর্জাগরণে অতুলনীয় ভূমিকা রেখেছে।',
+    meta:['ইরান','শাফিয়ি মাযহাব','হুজ্জাতুল ইসলাম উপাধি'] },
+  { id:'ibn-wahhab', name:'শাইখ ইবন আব্দুল ওয়াহহাব', era:'১১১৫–১২০৬ হি.', emoji:'📿', color:'#112a1c',
+    title:'মুজাদ্দিদ ও মুজতাহিদ', cats:['আকিদা'],
+    bio:'শাইখ মুহাম্মাদ বিন আব্দুল ওয়াহহাব (রহ.) আঠারো শতকে আরব উপদ্বীপে তাওহিদের পুনরুজ্জীবনে অগ্রণী ভূমিকা পালন করেন। তাঁর "কিতাবুত তাওহিদ" একটি যুগান্তকারী গ্রন্থ।',
+    meta:['সৌদি আরব','হাম্বলি মাযহাব','সংস্কারবাদী আন্দোলন'] },
+  { id:'mubarkpuri', name:'শাইখ সাফিউর রহমান', era:'১৯৪২–২০০৬', emoji:'✍️', color:'#3a1a5a',
+    title:'সিরাত গবেষক', cats:['সিরাত'],
+    bio:'শাইখ সাফিউর রহমান মুবারকপুরি (রহ.) ছিলেন বিশ্বখ্যাত সিরাত গবেষক। তাঁর "আর-রহিকুল মাখতুম" মক্কার রাবেতা প্রতিযোগিতায় প্রথম স্থান অর্জন করে বিশ্বের শ্রেষ্ঠ সিরাতগ্রন্থের মর্যাদা পায়।',
+    meta:['ভারত','ভারতীয় সুন্নি','আন্তর্জাতিক পুরস্কারপ্রাপ্ত'] },
+  { id:'sayyid-sabiq', name:'শাইখ সাইয়্যিদ সাবিক', era:'১৯১৫–২০০০', emoji:'📕', color:'#1a3a1a',
+    title:'ফকিহ ও শিক্ষক', cats:['ফিকহ'],
+    bio:'শাইখ সাইয়্যিদ সাবিক ছিলেন আল-আযহারের বিশিষ্ট আলিম। তাঁর "ফিকহুস সুন্নাহ" আধুনিক ইসলামী আইনশাস্ত্রে একটি বিপ্লব ঘটায় — কারণ এটি সরাসরি কুরআন-হাদিসের দলিলের ভিত্তিতে রচিত।',
+    meta:['মিসর','আল-আযহার','হাসান আল-বান্নার সংযোগ'] },
+  { id:'al-qarni', name:"শাইখ আয়িদ আল-কারনী", era:'১৯৫৯–বর্তমান', emoji:'🌿', color:'#2a1a3a',
+    title:'দাঈ ও লেখক', cats:['আধ্যাত্মিকতা','দাওয়াহ'],
+    bio:"শাইখ আয়িদ বিন আব্দুল্লাহ আল-কারনী সৌদি আরবের একজন বিখ্যাত দাঈ ও লেখক। তাঁর 'লা তাহযান' (দুঃখ করো না) গ্রন্থটি বিশ্বের ৪০টিরও বেশি ভাষায় অনূদিত হয়েছে।",
+    meta:['সৌদি আরব','দাওয়াহ আন্দোলন','বেস্টসেলার লেখক'] },
+];
+
+let books = [
+  { id:1, title:'কিতাবুত তাওহিদ', authorId:'ibn-wahhab', category:'আকিদা', rating:5,
+    excerpt:'তাওহিদের তিনটি প্রকার বিশ্লেষণ করে শিরকের স্বরূপ উন্মোচন করা হয়েছে।',
+    review:'এই বইটি আকিদার ক্ষেত্রে একটি অপরিহার্য গ্রন্থ। তাওহিদুর রুবুবিয়্যাহ, তাওহিদুল উলুহিয়্যাহ এবং তাওহিদুল আসমা ওয়াস সিফাত — প্রতিটি অধ্যায়ে কুরআন-হাদিসের প্রমাণ সহ বিশদভাবে আলোচনা করা হয়েছে। প্রতিটি অধ্যায়ের শেষে মহত্ত্বপূর্ণ মাসাইল ও সুক্ষ্ম বিষয় আলোচনা করা হয়েছে।',
+    reviewer:'উস্তাদ সাইফুল্লাহ', tags:['তাওহিদ','আকিদা','শিরক'], emoji:'🕌' },
+  { id:2, title:'রিয়াদুস সালিহীন', authorId:'imam-nawawi', category:'হাদিস', rating:5,
+    excerpt:'দৈনন্দিন জীবনের প্রতিটি দিকের জন্য নবীজির হাদিসের এক অমূল্য সংকলন।',
+    review:'রিয়াদুস সালিহীন — সৎ লোকদের বাগান। ইমাম নববীর এই সংকলন যুগ যুগ ধরে মুসলিম পরিবারগুলোর হৃদয় আলোকিত করে আসছে। আখলাক, ইবাদত, সামাজিক সম্পর্ক ও আধ্যাত্মিক উন্নতির জন্য এটি একটি সম্পূর্ণ গাইড।',
+    reviewer:'হাফিজ আবদুল করিম', tags:['হাদিস','আখলাক','সংকলন'], emoji:'📜' },
+  { id:3, title:'তাফসিরে ইবন কাসির', authorId:'ibn-kathir', category:'তাফসির', rating:5,
+    excerpt:'কুরআনের সবচেয়ে নির্ভরযোগ্য ও বিস্তারিত তাফসির গ্রন্থগুলোর মধ্যে অগ্রগণ্য।',
+    review:'ইমাম ইবন কাসিরের এই তাফসির গ্রন্থ আহলুস সুন্নাহ ওয়াল জামাআহর মানহাজ অনুযায়ী কুরআনের আয়াতের ব্যাখ্যা করে। প্রতিটি আয়াতের ব্যাখ্যায় অন্য আয়াত এবং সহিহ হাদিসের সাহায্য নেওয়া হয়েছে, যা একে বিশেষভাবে মূল্যবান করে তোলে।',
+    reviewer:'মাওলানা রফিকুল ইসলাম', tags:['তাফসির','কুরআন','ব্যাখ্যা'], emoji:'📖' },
+  { id:4, title:'আর-রহিকুল মাখতুম', authorId:'mubarkpuri', category:'সিরাত', rating:5,
+    excerpt:'বিশ্ব সিরাত সাহিত্য প্রতিযোগিতায় প্রথম পুরস্কারপ্রাপ্ত নবীজির অসাধারণ জীবনী।',
+    review:'মক্কার রাবেতায়ে আলামে ইসলামীর আন্তর্জাতিক প্রতিযোগিতায় প্রথম স্থান অর্জনকারী এই গ্রন্থটি সিরাত সাহিত্যে একটি মাইলফলক। নবীজির ﷺ জীবনের প্রতিটি দিক অত্যন্ত তথ্যনিষ্ঠ ও হৃদয়গ্রাহীভাবে উপস্থাপিত হয়েছে।',
+    reviewer:'ড. ইউসুফ আহমদ', tags:['সিরাত','নবীজি','জীবনী'], emoji:'🌙' },
+  { id:5, title:'এহইয়াউ উলুমিদ্দিন', authorId:'imam-ghazali', category:'আধ্যাত্মিকতা', rating:5,
+    excerpt:'ইসলামী আত্মশুদ্ধি ও আধ্যাত্মিক উন্নতির পথে এক অতুলনীয় গ্রন্থ।',
+    review:'ইমাম গাযালির এই মাস্টারপিস দিনের জ্ঞান পুনরুজ্জীবনের পথ দেখায়। ইবাদতের আদব, অন্তরের রোগ ও তার চিকিৎসা, দুনিয়া ত্যাগ ও আল্লাহর ভালোবাসা — প্রতিটি বিষয় এমন গভীরতায় আলোচিত।',
+    reviewer:'শাইখ তাকি উদ্দিন', tags:['তাসাউফ','আত্মশুদ্ধি','ইবাদত'], emoji:'💫' },
+  { id:6, title:'আল-বিদায়া ওয়ান নিহায়া', authorId:'ibn-kathir', category:'ইতিহাস', rating:5,
+    excerpt:'সৃষ্টির শুরু থেকে কিয়ামত পর্যন্ত সবচেয়ে বিস্তারিত ইসলামী ইতিহাস গ্রন্থ।',
+    review:'সৃষ্টির আরম্ভ, নবী-রাসুলদের ইতিহাস, সাহাবায়ে কিরামের যুগ, খলিফাদের শাসনকাল এবং কিয়ামতের আলামত পর্যন্ত সব বিষয় অত্যন্ত বিশদভাবে বর্ণিত। ইসলামী ইতিহাসের একটি অপ্রতিদ্বন্দ্বী আকর গ্রন্থ।',
+    reviewer:'প্রফেসর নাজমুল হক', tags:['ইতিহাস','খিলাফত','সাহাবা'], emoji:'🏛️' },
+  { id:7, title:'ফিকহুস সুন্নাহ', authorId:'sayyid-sabiq', category:'ফিকহ', rating:5,
+    excerpt:'দলিলভিত্তিক ইসলামী ফিকহের এক অসাধারণ সহজবোধ্য উপস্থাপনা।',
+    review:'কুরআন ও হাদিসের সরাসরি দলিলের ভিত্তিতে ফিকহি মাসাইল আলোচনা করে। তাহারাত থেকে শুরু করে মুয়ামালাত পর্যন্ত প্রতিটি বিষয় এত স্পষ্টভাবে উপস্থাপিত যে সাধারণ পাঠকও সহজে বুঝতে পারেন।',
+    reviewer:'মুফতি আবু বকর', tags:['ফিকহ','দলিল','মাসাইল'], emoji:'⚖️' },
+  { id:8, title:'লা তাহযান', authorId:'al-qarni', category:'আধ্যাত্মিকতা', rating:5,
+    excerpt:'দুশ্চিন্তা ও হতাশার বিরুদ্ধে ইসলামের অস্ত্র — কোটি মানুষের জীবন পরিবর্তন করা বই।',
+    review:'লা তাহযান অর্থাৎ দুঃখ করো না — এই বইটি বিশ্বের ৪০টিরও বেশি ভাষায় অনূদিত হয়েছে। আধুনিক জীবনের দুশ্চিন্তা, হতাশা ও মানসিক চাপের বিরুদ্ধে কুরআন-হাদিসের আলোকে কার্যকর সমাধান দেওয়া হয়েছে।',
+    reviewer:'নুসরাত ফাতিমা', tags:['মানসিক শান্তি','তাওয়াক্কুল','প্রেরণা'], emoji:'💫' },
+  { id:9, title:'আল-আযকার', authorId:'imam-nawawi', category:'আধ্যাত্মিকতা', rating:5,
+    excerpt:'দৈনন্দিন যিকর, দুআ ও আমলের এক পরিপূর্ণ সংকলন।',
+    review:'সকাল-সন্ধ্যার আযকার থেকে শুরু করে বিভিন্ন পরিস্থিতির দুআ — ইমাম নববীর এই গ্রন্থে নববী সুন্নাহর আলোকে সব আমল সংকলিত হয়েছে। প্রতিটি দুআর সাথে সহিহ হাদিসের রেফারেন্স দেওয়া আছে।',
+    reviewer:'হাফিজ তানভির', tags:['যিকর','দুআ','আমল'], emoji:'💫' },
+  { id:10, title:'তাহাফুতুল ফালাসিফাহ', authorId:'imam-ghazali', category:'আকিদা', rating:4,
+    excerpt:'দার্শনিকদের চিন্তার খণ্ডন — ইসলামী যুক্তিবিদ্যার ইতিহাসে এক বিপ্লবী গ্রন্থ।',
+    review:'এই গ্রন্থে ইমাম গাযালি প্লেটো-অ্যারিস্টটলের দর্শনের বিরুদ্ধে যুক্তি দাঁড় করিয়েছেন। কুরআনি বিশ্বদৃষ্টির আলোকে গ্রিক দর্শনের ভুলগুলো চিহ্নিত করা হয়েছে। ইসলামী আকিদার রক্ষায় একটি মাইলফলক।',
+    reviewer:'ড. মাহফুজুর রহমান', tags:['দর্শন','কালাম','আকিদা'], emoji:'🕌' },
+  { id:11, title:'দাওয়াহর পদ্ধতি', authorId:'al-qarni', category:'দাওয়াহ', rating:4,
+    excerpt:'আধুনিক বিশ্বে ইসলাম প্রচারের কার্যকর পদ্ধতি ও মূলনীতি নিয়ে আলোচনা।',
+    review:'এই গ্রন্থে দাওয়াহর কুরআনিক পদ্ধতি, বিভিন্ন শ্রেণীর মানুষের সাথে কথা বলার উপায়, আপত্তির জবাব দেওয়ার নিয়ম এবং আধুনিক মিডিয়া ব্যবহার করে দাওয়াহ দেওয়ার পদ্ধতি আলোচনা করা হয়েছে।',
+    reviewer:'ড. মুহাম্মাদ আলী', tags:['দাওয়াহ','পদ্ধতি','আধুনিক'], emoji:'🗣️' },
+  { id:12, title:'শারহু মুসলিম', authorId:'imam-nawawi', category:'হাদিস', rating:5,
+    excerpt:'সহিহ মুসলিমের সবচেয়ে বিস্তারিত ও গ্রহণযোগ্য ব্যাখ্যাগ্রন্থ।',
+    review:'ইমাম নববীর এই ব্যাখ্যাগ্রন্থ সহিহ মুসলিমের প্রতিটি হাদিসের ভাষাগত, আইনগত ও আধ্যাত্মিক দিক উন্মোচন করে। আলিম ও সাধারণ পাঠক উভয়ের জন্যই এটি অমূল্য সম্পদ।',
+    reviewer:'উস্তাদ আমিনুল হক', tags:['হাদিস','শারহ','মুসলিম'], emoji:'📜' },
+];
+
+let currentRating = 0;
+
+/* ════════════════════════════════
+   ROUTING
+════════════════════════════════ */
+const pages = ['home','categories','category','authors','author','all-books','add-review'];
+
+function navigate(pageId, extra) {
+  pages.forEach(p => {
+    const el = document.getElementById('page-'+p);
+    if(el) el.classList.remove('active');
+  });
+  const target = document.getElementById('page-'+pageId);
+  if(target) { target.classList.add('active'); window.scrollTo(0,0); }
+
+  // Update nav active state
+  document.querySelectorAll('.hnav-btn').forEach(b => b.classList.remove('active'));
+  const nb = document.getElementById('nav-'+pageId);
+  if(nb) nb.classList.add('active');
+
+  // Render page content
+  if(pageId === 'home') renderHome();
+  else if(pageId === 'categories') renderCategoriesPage();
+  else if(pageId === 'category' && extra) renderCategoryPage(extra);
+  else if(pageId === 'authors') renderAuthorsPage();
+  else if(pageId === 'author' && extra) renderAuthorPage(extra);
+  else if(pageId === 'all-books') renderAllBooksPage();
+}
+
+/* ════════════════════════════════
+   HELPERS
+════════════════════════════════ */
+function getAuthor(id) { return AUTHORS.find(a => a.id === id); }
+function getCat(id) { return CATEGORIES.find(c => c.id === id); }
+function authorBooks(authorId) { return books.filter(b => b.authorId === authorId); }
+function catBooks(catId) { return books.filter(b => b.category === catId); }
+function stars(n) { return '★'.repeat(n) + '☆'.repeat(5-n); }
+
+function bookCardHTML(b, delay=0) {
+  const cat = getCat(b.category);
+  const author = getAuthor(b.authorId);
+  const bg = cat ? cat.color : '#1a2a1a';
+  return `<div class="book-card" style="animation-delay:${delay}s" onclick="openModal(${b.id})">
+    <div class="book-spine" style="background:${bg};">
+      <span style="position:relative;z-index:1;font-size:3rem;">${b.emoji||'📚'}</span>
+      <span class="book-spine-label">${b.category}</span>
+    </div>
+    <div class="book-body">
+      <div class="book-meta">
+        <span class="book-cat-tag">${b.category}</span>
+        <span class="stars">${stars(b.rating)}</span>
+      </div>
+      <div class="book-title">${b.title}</div>
+      <div class="book-author-link" onclick="event.stopPropagation(); navigate('author','${b.authorId}')">
+        ✍️ ${author ? author.name : b.authorId}
+      </div>
+      <div class="book-excerpt">${b.excerpt}</div>
+    </div>
+    <div class="book-footer">
+      <span class="reviewer-tag">👤 ${b.reviewer||'পাঠক'}</span>
+      <button class="read-more" onclick="event.stopPropagation(); openModal(${b.id})">পড়ুন →</button>
+    </div>
+  </div>`;
+}
+
+function authorCardHTML(a, delay=0) {
+  const cnt = authorBooks(a.id).length;
+  return `<div class="author-card" style="animation-delay:${delay}s" onclick="navigate('author','${a.id}')">
+    <div class="author-avatar" style="background:${a.color};">
+      <span style="position:relative;z-index:1;">${a.emoji}</span>
+    </div>
+    <div class="author-name">${a.name}</div>
+    <div class="author-era">${a.era}</div>
+    <span class="author-books-count">${cnt}টি গ্রন্থ</span>
+  </div>`;
+}
+
+function catCardHTML(c, delay=0) {
+  const cnt = catBooks(c.id).length;
+  return `<div class="cat-card" style="animation-delay:${delay}s" onclick="navigate('category','${c.id}')">
+    <div class="cat-card-top" style="background:${c.color};">
+      <span style="position:relative;z-index:1;">${c.emoji}</span>
+    </div>
+    <div class="cat-card-body">
+      <div class="cat-card-name">${c.id}</div>
+      <div class="cat-card-desc">${c.desc}</div>
+      <div class="cat-card-footer">
+        <span class="cat-count-pill">${cnt}টি বই</span>
+        <span class="cat-arrow">→</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ════════════════════════════════
+   RENDER: HOME
+════════════════════════════════ */
+function renderHome() {
+  // Stats
+  document.getElementById('heroStats').innerHTML = `
+    <div class="stat-box"><span class="stat-num">${books.length}</span><span class="stat-lbl">বই রিভিউ</span></div>
+    <div class="stat-box"><span class="stat-num">${AUTHORS.length}</span><span class="stat-lbl">লেখক</span></div>
+    <div class="stat-box"><span class="stat-num">${CATEGORIES.length}</span><span class="stat-lbl">ক্যাটাগরি</span></div>
+  `;
+  // Categories (first 4)
+  document.getElementById('homeCatGrid').innerHTML =
+    CATEGORIES.slice(0,4).map((c,i) => catCardHTML(c, i*0.07)).join('');
+  // Books (first 6)
+  document.getElementById('homeBookGrid').innerHTML =
+    books.slice(0,6).map((b,i) => bookCardHTML(b, i*0.07)).join('');
+  // Authors (first 4)
+  document.getElementById('homeAuthorGrid').innerHTML =
+    AUTHORS.slice(0,4).map((a,i) => authorCardHTML(a, i*0.07)).join('');
+}
+
+/* ════════════════════════════════
+   RENDER: CATEGORIES PAGE
+════════════════════════════════ */
+function renderCategoriesPage() {
+  document.getElementById('allCatGrid').innerHTML =
+    CATEGORIES.map((c,i) => catCardHTML(c, i*0.06)).join('');
+}
+
+/* ════════════════════════════════
+   RENDER: SINGLE CATEGORY PAGE
+════════════════════════════════ */
+function renderCategoryPage(catId) {
+  const cat = getCat(catId);
+  if(!cat) return;
+
+  document.getElementById('bcCatName').textContent = catId;
+  document.getElementById('catBooksTitle').textContent = catId + ' বিভাগের বইসমূহ';
+  document.getElementById('catAuthorsTitle').textContent = catId + ' বিভাগের লেখকগণ';
+
+  // Hero
+  const bks = catBooks(catId);
+  const authorsInCat = AUTHORS.filter(a => a.cats.includes(catId));
+  document.getElementById('catPageHeroWrap').innerHTML = `
+    <div class="cat-page-hero" style="background:linear-gradient(135deg,${cat.color},${cat.color}cc);">
+      <div style="position:absolute;inset:0;opacity:0.05;background-image:repeating-linear-gradient(45deg,#c9913a 0,#c9913a 1px,transparent 0,transparent 20px);"></div>
+      <div class="cat-hero-inner" style="position:relative;z-index:1;">
+        <div class="cat-hero-icon" style="background:rgba(255,255,255,0.1);border:2px solid rgba(201,145,58,0.4);">
+          ${cat.emoji}
+        </div>
+        <div class="cat-hero-info">
+          <h1>${catId} বিভাগ</h1>
+          <p>${cat.longDesc}</p>
+          <div class="cat-hero-stats">
+            <div class="cat-stat"><span class="cat-stat-n">${bks.length}</span><span class="cat-stat-l">মোট বই</span></div>
+            <div class="cat-stat"><span class="cat-stat-n">${authorsInCat.length}</span><span class="cat-stat-l">লেখক</span></div>
+            <div class="cat-stat"><span class="cat-stat-n">${bks.length>0?Math.round(bks.reduce((s,b)=>s+b.rating,0)/bks.length*10)/10:'—'}</span><span class="cat-stat-l">গড় রেটিং</span></div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  // Books
+  if(bks.length === 0) {
+    document.getElementById('catBooksGrid').innerHTML = '';
+    document.getElementById('catBooksEmpty').style.display = 'block';
+  } else {
+    document.getElementById('catBooksEmpty').style.display = 'none';
+    document.getElementById('catBooksGrid').innerHTML = bks.map((b,i) => bookCardHTML(b,i*0.07)).join('');
+  }
+
+  // Authors in category
+  if(authorsInCat.length > 0) {
+    document.getElementById('catAuthorsSection').style.display = 'block';
+    document.getElementById('catAuthorsGrid').innerHTML = authorsInCat.map((a,i) => authorCardHTML(a,i*0.07)).join('');
+  } else {
+    document.getElementById('catAuthorsSection').style.display = 'none';
+  }
+}
+
+/* ════════════════════════════════
+   RENDER: AUTHORS PAGE
+════════════════════════════════ */
+let authorFilter = 'all';
+function renderAuthorsPage() {
+  // Filter buttons
+  const cats = ['all', ...new Set(AUTHORS.flatMap(a=>a.cats))];
+  document.getElementById('authorCatFilter').innerHTML =
+    cats.map(c => `<button class="filter-btn ${c===authorFilter?'active':''}" onclick="setAuthorFilter('${c}')">${c==='all'?'সব লেখক':c}</button>`).join('');
+  // Grid
+  const filtered = authorFilter==='all' ? AUTHORS : AUTHORS.filter(a=>a.cats.includes(authorFilter));
+  document.getElementById('allAuthorGrid').innerHTML = filtered.map((a,i) => authorCardHTML(a,i*0.06)).join('');
+}
+
+function setAuthorFilter(f) {
+  authorFilter = f;
+  renderAuthorsPage();
+}
+
+/* ════════════════════════════════
+   RENDER: SINGLE AUTHOR PAGE
+════════════════════════════════ */
+function renderAuthorPage(authorId) {
+  const author = getAuthor(authorId);
+  if(!author) return;
+
+  document.getElementById('bcAuthorName').textContent = author.name;
+  document.getElementById('authorBooksTitle').textContent = author.name + '-এর গ্রন্থসমূহ';
+
+  const bks = authorBooks(authorId);
+
+  document.getElementById('authorPageHeroWrap').innerHTML = `
+    <div class="author-page-hero" style="background:linear-gradient(135deg,${author.color},${author.color}bb);">
+      <div style="position:absolute;inset:0;opacity:0.04;background:repeating-radial-gradient(circle at 20px 20px, #c9913a 1px, transparent 0 40px);"></div>
+      <div class="author-hero-inner" style="position:relative;z-index:1;">
+        <div class="author-big-avatar" style="background:rgba(255,255,255,0.1);">
+          ${author.emoji}
+        </div>
+        <div class="author-hero-info">
+          <h1>${author.name}</h1>
+          <span class="author-title-tag">${author.title}</span>
+          <p class="author-bio">${author.bio}</p>
+          <div class="author-meta-chips">
+            <span class="meta-chip">📅 ${author.era}</span>
+            ${author.meta.map(m=>`<span class="meta-chip">${m}</span>`).join('')}
+            <span class="meta-chip">📚 ${bks.length}টি গ্রন্থ রিভিউ</span>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+            ${author.cats.map(c=>`<button class="filter-btn active" style="font-size:0.75rem;padding:4px 12px;" onclick="navigate('category','${c}')">${getCat(c)?getCat(c).emoji:''} ${c}</button>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('authorBooksGrid').innerHTML =
+    bks.length > 0
+      ? bks.map((b,i) => bookCardHTML(b,i*0.07)).join('')
+      : `<div class="empty-state"><div class="big-icon">📭</div><p>এই লেখকের কোনো রিভিউ এখনো যোগ হয়নি।</p></div>`;
+}
+
+/* ════════════════════════════════
+   RENDER: ALL BOOKS PAGE
+════════════════════════════════ */
+let booksFilter = 'all';
+function renderAllBooksPage() {
+  const cats = ['all', ...CATEGORIES.map(c=>c.id)];
+  document.getElementById('allBooksFilter').innerHTML =
+    cats.map(c=>`<button class="filter-btn ${c===booksFilter?'active':''}" onclick="setBooksFilter('${c}')">${c==='all'?'সব বই':c}</button>`).join('');
+  const filtered = booksFilter==='all' ? books : books.filter(b=>b.category===booksFilter);
+  document.getElementById('allBooksGrid').innerHTML = filtered.map((b,i)=>bookCardHTML(b,i*0.05)).join('');
+}
+
+function setBooksFilter(f) {
+  booksFilter = f;
+  renderAllBooksPage();
+}
+
+/* ════════════════════════════════
+   MODAL
+════════════════════════════════ */
+function openModal(id) {
+  const b = books.find(x=>x.id===id);
+  if(!b) return;
+  const cat = getCat(b.category);
+  const author = getAuthor(b.authorId);
+  document.getElementById('modalTop').innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <span style="font-size:4rem;position:relative;z-index:1;">${b.emoji||'📚'}</span>`;
+  document.getElementById('modalTop').style.background = cat ? cat.color : '#1a2a1a';
+  document.getElementById('modalContent').innerHTML = `
+    <span class="modal-cat-tag">${cat?cat.emoji:''} ${b.category}</span>
+    <div class="modal-title">${b.title}</div>
+    <div class="modal-author-line" onclick="closeModal(); navigate('author','${b.authorId}')">
+      ✍️ ${author ? author.name : b.authorId} — প্রোফাইল দেখুন →
+    </div>
+    <div class="modal-stars">${stars(b.rating)}</div>
+    <div class="modal-section">
+      <h4>📋 সারসংক্ষেপ</h4>
+      <p>${b.excerpt}</p>
+    </div>
+    <div class="modal-section">
+      <h4>📝 বিস্তারিত রিভিউ</h4>
+      <p>${b.review}</p>
+    </div>
+    <div class="modal-section">
+      <h4>🔖 ট্যাগ</h4>
+      <div class="modal-tags">${b.tags.map(t=>`<span class="modal-tag">#${t}</span>`).join('')}</div>
+    </div>
+    <div class="modal-section">
+      <h4>👤 রিভিউকারী</h4>
+      <p>${b.reviewer || 'নাম প্রকাশে অনিচ্ছুক'}</p>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalBg(e) {
+  if(e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+/* ════════════════════════════════
+   STAR RATING
+════════════════════════════════ */
+function setRating(n) {
+  currentRating = n;
+  document.querySelectorAll('#starPicker span').forEach((s,i) => s.classList.toggle('lit', i<n));
+}
+
+/* ════════════════════════════════
+   SUBMIT REVIEW
+════════════════════════════════ */
+function submitReview() {
+  const title   = document.getElementById('rv_title').value.trim();
+  const authorN = document.getElementById('rv_author').value.trim();
+  const cat     = document.getElementById('rv_cat').value;
+  const review  = document.getElementById('rv_review').value.trim();
+  const tagsRaw = document.getElementById('rv_tags').value.trim();
+  const reviewer= document.getElementById('rv_reviewer').value.trim();
+
+  if(!title||!authorN||!cat||!review) {
+    alert('অনুগ্রহ করে তারকা চিহ্নিত (*) সকল ঘর পূরণ করুন।'); return;
+  }
+
+  // Find or create author
+  let authorId = AUTHORS.find(a => a.name.toLowerCase()===authorN.toLowerCase())?.id;
+  if(!authorId) {
+    authorId = 'author-'+Date.now();
+    const catObj = getCat(cat);
+    AUTHORS.push({ id:authorId, name:authorN, era:'আধুনিক', emoji:'✍️',
+      color: catObj ? catObj.color : '#1a2a1a',
+      title:'লেখক', cats:[cat],
+      bio:authorN + ' কর্তৃক রচিত গ্রন্থের রিভিউ।', meta:[cat] });
+  }
+
+  const catObj = getCat(cat);
+  books.unshift({
+    id: Date.now(),
+    title, authorId, category: cat,
+    rating: currentRating || 4,
+    excerpt: review.substring(0, 110) + '…',
+    review, reviewer: reviewer || 'নাম প্রকাশে অনিচ্ছুক',
+    tags: tagsRaw ? tagsRaw.split(',').map(t=>t.trim()).filter(Boolean) : [cat],
+    emoji: catObj ? catObj.emoji : '📚',
+  });
+
+  ['rv_title','rv_author','rv_review','rv_tags','rv_reviewer'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('rv_cat').value='';
+  currentRating=0;
+  document.querySelectorAll('#starPicker span').forEach(s=>s.classList.remove('lit'));
+
+  const t = document.getElementById('rvToast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3500);
+  setTimeout(()=>{ navigate('home'); }, 1500);
+}
+
+/* ════════════════════════════════
+   MOBILE NAV
+════════════════════════════════ */
+function toggleMobileNav() {
+  document.getElementById('headerNav').classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('headerNav').classList.remove('open');
+}
+
+/* ════════════════════════════════
+   INIT
+════════════════════════════════ */
+renderHome();
+</script>
+</body>
+</html>
